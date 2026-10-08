@@ -1,0 +1,35 @@
+<SunopsisExport>
+<Object class="com.sunopsis.dwg.dbobj.SnpContext">
+<Field name="IContext" type="java.lang.String"><![CDATA[1]]></Field>
+<Field name="ContextCode" type="java.lang.String"><![CDATA[PROD]]></Field>
+<Field name="ContextName" type="java.lang.String"><![CDATA[Production]]></Field>
+<Field name="IndDefault" type="java.lang.String"><![CDATA[1]]></Field>
+</Object>
+<Object class="com.sunopsis.dwg.dbobj.SnpTechno">
+<Field name="ITechno" type="java.lang.String"><![CDATA[3]]></Field>
+<Field name="TechIntName" type="java.lang.String"><![CDATA[ORACLE]]></Field>
+</Object>
+<Object class="com.sunopsis.dwg.dbobj.SnpConnect">
+<Field name="IConnect" type="java.lang.String"><![CDATA[11]]></Field>
+<Field name="ITechno" type="java.lang.String"><![CDATA[3]]></Field>
+<Field name="ConName" type="java.lang.String"><![CDATA[DS_PBDW_PROD]]></Field>
+<Field name="JavaUrl" type="java.lang.String"><![CDATA[jdbc:oracle:thin:@pbdwdb.prod.bbh.com:1521/PBDW]]></Field>
+<Field name="UserName" type="java.lang.String"><![CDATA[ODI_USER]]></Field>
+</Object>
+<Object class="com.sunopsis.dwg.dbobj.SnpPschema">
+<Field name="IPschema" type="java.lang.String"><![CDATA[21]]></Field>
+<Field name="IConnect" type="java.lang.String"><![CDATA[11]]></Field>
+<Field name="SchemaName" type="java.lang.String"><![CDATA[PBDWAPP]]></Field>
+<Field name="WschemaName" type="java.lang.String"><![CDATA[ODI_WORK]]></Field>
+</Object>
+<Object class="com.sunopsis.dwg.dbobj.SnpLschema">
+<Field name="ILschema" type="java.lang.String"><![CDATA[31]]></Field>
+<Field name="ITechno" type="java.lang.String"><![CDATA[3]]></Field>
+<Field name="LschemaName" type="java.lang.String"><![CDATA[LS_PBDW]]></Field>
+</Object>
+<Object class="com.sunopsis.dwg.dbobj.SnpPschemaCont">
+<Field name="IContext" type="java.lang.String"><![CDATA[1]]></Field>
+<Field name="ILschema" type="java.lang.String"><![CDATA[31]]></Field>
+<Field name="IPschema" type="java.lang.String"><![CDATA[21]]></Field>
+</Object>
+</SunopsisExport>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><SunopsisExport>
+<Object class="com.sunopsis.dwg.dbobj.SnpLoadPlan">
+<Field name="LoadPlanName" type="java.lang.String"><![CDATA[LP_PBDW_INTRADAY]]></Field>
+<Field name="ILoadPlan" type="java.lang.String"><![CDATA[9]]></Field>
+<Field name="Description" type="java.lang.String"><![CDATA[Intraday PBDW refresh]]></Field>
+<Field name="LastDate" type="java.lang.String"><![CDATA[2024-06-12 09:00:00.0]]></Field>
+</Object>
+<Object class="com.sunopsis.dwg.dbobj.SnpLpStep">
+<Field name="ILoadPlan" type="java.lang.String"><![CDATA[9]]></Field>
+<Field name="ILpStep" type="java.lang.String"><![CDATA[1]]></Field>
+<Field name="ParILpStep" type="java.lang.String"><![CDATA[]]></Field>
+<Field name="LpStepName" type="java.lang.String"><![CDATA[Root]]></Field>
+<Field name="LpStepType" type="java.lang.String"><![CDATA[SE]]></Field>
+<Field name="StepOrder" type="java.lang.String"><![CDATA[0]]></Field>
+<Field name="ScenName" type="java.lang.String"><![CDATA[]]></Field>
+<Field name="ScenVersion" type="java.lang.String"><![CDATA[]]></Field>
+<Field name="IndEnabled" type="java.lang.String"><![CDATA[1]]></Field>
+</Object>
+<Object class="com.sunopsis.dwg.dbobj.SnpLpStep">
+<Field name="ILoadPlan" type="java.lang.String"><![CDATA[9]]></Field>
+<Field name="ILpStep" type="java.lang.String"><![CDATA[2]]></Field>
+<Field name="ParILpStep" type="java.lang.String"><![CDATA[1]]></Field>
+<Field name="LpStepName" type="java.lang.String"><![CDATA[Addepar]]></Field>
+<Field name="LpStepType" type="java.lang.String"><![CDATA[SE]]></Field>
+<Field name="StepOrder" type="java.lang.String"><![CDATA[1]]></Field>
+<Field name="ScenName" type="java.lang.String"><![CDATA[]]></Field>
+<Field name="ScenVersion" type="java.lang.String"><![CDATA[]]></Field>
+<Field name="IndEnabled" type="java.lang.String"><![CDATA[1]]></Field>
+</Object>
+<Object class="com.sunopsis.dwg.dbobj.SnpLpStep">
+<Field name="ILoadPlan" type="java.lang.String"><![CDATA[9]]></Field>
+<Field name="ILpStep" type="java.lang.String"><![CDATA[3]]></Field>
+<Field name="ParILpStep" type="java.lang.String"><![CDATA[2]]></Field>
+<Field name="LpStepName" type="java.lang.String"><![CDATA[Benchmark]]></Field>
+<Field name="LpStepType" type="java.lang.String"><![CDATA[RS]]></Field>
+<Field name="StepOrder" type="java.lang.String"><![CDATA[1]]></Field>
+<Field name="ScenName" type="java.lang.String"><![CDATA[SCN_ADDEPAR_STG2_FR_BENCHMARK]]></Field>
+<Field name="ScenVersion" type="java.lang.String"><![CDATA[-1]]></Field>
+<Field name="IndEnabled" type="java.lang.String"><![CDATA[1]]></Field>
+</Object>
+<Object class="com.sunopsis.dwg.dbobj.SnpLpStep">
+<Field name="ILoadPlan" type="java.lang.String"><![CDATA[9]]></Field>
+<Field name="ILpStep" type="java.lang.String"><![CDATA[4]]></Field>
+<Field name="ParILpStep" type="java.lang.String"><![CDATA[2]]></Field>
+<Field name="LpStepName" type="java.lang.String"><![CDATA[Performance]]></Field>
+<Field name="LpStepType" type="java.lang.String"><![CDATA[RS]]></Field>
+<Field name="StepOrder" type="java.lang.String"><![CDATA[2]]></Field>
+<Field name="ScenName" type="java.lang.String"><![CDATA[SCN_ADDEPAR_STG2_FR_PERFORMANCE]]></Field>
+<Field name="ScenVersion" type="java.lang.String"><![CDATA[-1]]></Field>
+<Field name="IndEnabled" type="java.lang.String"><![CDATA[1]]></Field>
+</Object>
+<Object class="com.sunopsis.dwg.dbobj.SnpLpStep">
+<Field name="ILoadPlan" type="java.lang.String"><![CDATA[9]]></Field>
+<Field name="ILpStep" type="java.lang.String"><![CDATA[5]]></Field>
+<Field name="ParILpStep" type="java.lang.String"><![CDATA[1]]></Field>
+<Field name="LpStepName" type="java.lang.String"><![CDATA[Holdings]]></Field>
+<Field name="LpStepType" type="java.lang.String"><![CDATA[PA]]></Field>
+<Field name="StepOrder" type="java.lang.String"><![CDATA[2]]></Field>
+<Field name="ScenName" type="java.lang.String"><![CDATA[]]></Field>
+<Field name="ScenVersion" type="java.lang.String"><![CDATA[]]></Field>
+<Field name="IndEnabled" type="java.lang.String"><![CDATA[1]]></Field>
+</Object>
+<Object class="com.sunopsis.dwg.dbobj.SnpLpStep">
+<Field name="ILoadPlan" type="java.lang.String"><![CDATA[9]]></Field>
+<Field name="ILpStep" type="java.lang.String"><![CDATA[6]]></Field>
+<Field name="ParILpStep" type="java.lang.String"><![CDATA[5]]></Field>
+<Field name="LpStepName" type="java.lang.String"><![CDATA[Fact Holdings]]></Field>
+<Field name="LpStepType" type="java.lang.String"><![CDATA[RS]]></Field>
+<Field name="StepOrder" type="java.lang.String"><![CDATA[1]]></Field>
+<Field name="ScenName" type="java.lang.String"><![CDATA[03_SCN_FACT_HOLDINGS_UPDATED_CLEAN]]></Field>
+<Field name="ScenVersion" type="java.lang.String"><![CDATA[001]]></Field>
+<Field name="IndEnabled" type="java.lang.String"><![CDATA[1]]></Field>
+</Object>
+<Object class="com.sunopsis.dwg.dbobj.SnpLpStep">
+<Field name="ILoadPlan" type="java.lang.String"><![CDATA[9]]></Field>
+<Field name="ILpStep" type="java.lang.String"><![CDATA[7]]></Field>
+<Field name="ParILpStep" type="java.lang.String"><![CDATA[5]]></Field>
+<Field name="LpStepName" type="java.lang.String"><![CDATA[Old API step]]></Field>
+<Field name="LpStepType" type="java.lang.String"><![CDATA[RS]]></Field>
+<Field name="StepOrder" type="java.lang.String"><![CDATA[2]]></Field>
+<Field name="ScenName" type="java.lang.String"><![CDATA[SCN_API_HISTORY_DATA_PULL_LOOP]]></Field>
+<Field name="ScenVersion" type="java.lang.String"><![CDATA[001]]></Field>
+<Field name="IndEnabled" type="java.lang.String"><![CDATA[0]]></Field>
+</Object>
+</SunopsisExport>

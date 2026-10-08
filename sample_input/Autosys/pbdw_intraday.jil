@@ -1,0 +1,16 @@
+insert_job: PBDW_BOX_INTRADAY   job_type: BOX
+owner: odiprod
+date_conditions: 1
+days_of_week: mo,tu,we,th,fr
+start_times: "07:00, 12:00, 16:00"
+
+insert_job: PBDW_CMD_LP_INTRADAY   job_type: CMD
+box_name: PBDW_BOX_INTRADAY
+command: /u01/odi/agent/bin/startloadplan.sh LP_PBDW_INTRADAY PROD "-AGENT_URL=http://odiagent01:20910/oraclediagent"
+machine: odiagent01
+owner: odiprod
+
+insert_job: PBDW_CMD_PURGE   job_type: CMD
+command: /u01/odi/agent/bin/startscen.sh SCN_ALL_PURGE_LOG_JOB_NEW 002 PROD
+machine: odiagent01
+condition: s(PBDW_CMD_LP_INTRADAY)

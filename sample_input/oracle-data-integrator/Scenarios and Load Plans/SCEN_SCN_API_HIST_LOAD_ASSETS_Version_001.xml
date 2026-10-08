@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SunopsisExport><Admin RepositoryVersion="05.02.02.09"/>
+<Object class="com.sunopsis.dwg.dbobj.SnpScen">
+<Field name="ScenName" type="java.lang.String"><![CDATA[SCN_API_HIST_LOAD_ASSETS]]></Field>
+<Field name="ScenVersion" type="java.lang.String"><![CDATA[001]]></Field>
+<Field name="ScenNo" type="java.lang.String"><![CDATA[106]]></Field>
+<Field name="OrigObjType" type="java.lang.String"><![CDATA[PACKAGE]]></Field>
+<Field name="OrigObjName" type="java.lang.String"><![CDATA[PKG_API_ASSETS]]></Field>
+<Field name="Description" type="java.lang.String"><![CDATA[Loads SCN_API_HIST_LOAD_ASSETS]]></Field>
+<Field name="LastDate" type="java.lang.String"><![CDATA[2024-06-11 10:12:00.0]]></Field>
+<Field name="LastUser" type="java.lang.String"><![CDATA[SUPERVISOR]]></Field>
+</Object>
+<Object class="com.sunopsis.dwg.dbobj.SnpScenStep">
+<Field name="ScenNo" type="java.lang.String"><![CDATA[106]]></Field>
+<Field name="Nno" type="java.lang.String"><![CDATA[0]]></Field>
+<Field name="StepName" type="java.lang.String"><![CDATA[PKG_API_ASSETS]]></Field>
+<Field name="StepType" type="java.lang.String"><![CDATA[F]]></Field>
+</Object>
+<Object class="com.sunopsis.dwg.dbobj.SnpScenTask">
+<Field name="ScenNo" type="java.lang.String"><![CDATA[106]]></Field>
+<Field name="Nno" type="java.lang.String"><![CDATA[0]]></Field>
+<Field name="ScenTaskNo" type="java.lang.String"><![CDATA[1]]></Field>
+<Field name="TaskName1" type="java.lang.String"><![CDATA[PKG_API_ASSETS]]></Field>
+<Field name="TaskName2" type="java.lang.String"><![CDATA[IKM Oracle Incremental Update]]></Field>
+<Field name="TaskName3" type="java.lang.String"><![CDATA[Task 1]]></Field>
+<Field name="DefLschemaName" type="java.lang.String"><![CDATA[LS_PBDW]]></Field>
+<Field name="DefTechIntName" type="java.lang.String"><![CDATA[ORACLE]]></Field>
+<Field name="ColLschemaName" type="java.lang.String"><![CDATA[LS_STG]]></Field>
+<Field name="ColTechIntName" type="java.lang.String"><![CDATA[ORACLE]]></Field>
+</Object>
+<Object class="com.sunopsis.dwg.dbobj.SnpScenTxt">
+<Field name="ScenNo" type="java.lang.String"><![CDATA[106]]></Field>
+<Field name="Nno" type="java.lang.String"><![CDATA[0]]></Field>
+<Field name="ScenTaskNo" type="java.lang.String"><![CDATA[1]]></Field>
+<Field name="OrdTxt" type="java.lang.String"><![CDATA[0]]></Field>
+<Field name="IndTxtCol" type="java.lang.String"><![CDATA[D]]></Field>
+<Field name="Txt" type="java.lang.String"><![CDATA[OdiOSCommand "curl -u svc:password=Secr3t https://api.addepar.example.com/v1/assets"]]></Field>
+</Object>
+<Object class="com.sunopsis.dwg.dbobj.SnpScenTask">
+<Field name="ScenNo" type="java.lang.String"><![CDATA[106]]></Field>
+<Field name="Nno" type="java.lang.String"><![CDATA[0]]></Field>
+<Field name="ScenTaskNo" type="java.lang.String"><![CDATA[2]]></Field>
+<Field name="TaskName1" type="java.lang.String"><![CDATA[PKG_API_ASSETS]]></Field>
+<Field name="TaskName2" type="java.lang.String"><![CDATA[IKM Oracle Incremental Update]]></Field>
+<Field name="TaskName3" type="java.lang.String"><![CDATA[Task 2]]></Field>
+<Field name="DefLschemaName" type="java.lang.String"><![CDATA[LS_PBDW]]></Field>
+<Field name="DefTechIntName" type="java.lang.String"><![CDATA[ORACLE]]></Field>
+<Field name="ColLschemaName" type="java.lang.String"><![CDATA[LS_STG]]></Field>
+<Field name="ColTechIntName" type="java.lang.String"><![CDATA[ORACLE]]></Field>
+</Object>
+<Object class="com.sunopsis.dwg.dbobj.SnpScenTxt">
+<Field name="ScenNo" type="java.lang.String"><![CDATA[106]]></Field>
+<Field name="Nno" type="java.lang.String"><![CDATA[0]]></Field>
+<Field name="ScenTaskNo" type="java.lang.String"><![CDATA[2]]></Field>
+<Field name="OrdTxt" type="java.lang.String"><![CDATA[0]]></Field>
+<Field name="IndTxtCol" type="java.lang.String"><![CDATA[D]]></Field>
+<Field name="Txt" type="java.lang.String"><![CDATA[insert into PBDWAPP.STG1_API_ASSETS select * from PBDWAPP.EXT_API_ASSETS]]></Field>
+</Object>
+</SunopsisExport>

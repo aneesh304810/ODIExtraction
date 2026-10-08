@@ -1,0 +1,5 @@
+<SunopsisExport><Object class="com.sunopsis.dwg.dbobj.SnpAgent">
+<Field name="AgentName" type="java.lang.String"><![CDATA[OracleDIAgent1]]></Field>
+<Field name="HostName" type="java.lang.String"><![CDATA[odiagent01.prod.bbh.com]]></Field>
+<Field name="AgentPort" type="java.lang.String"><![CDATA[20910]]></Field>
+</Object></SunopsisExport>

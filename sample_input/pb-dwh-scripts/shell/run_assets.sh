@@ -1,0 +1,4 @@
+sqlplus -s $CONN <<EOF
+exec PBDWAPP.PRC_REFRESH_HOLDINGS_SMRY(sysdate);
+EOF
+./startscen.sh SCN_API_HIST_LOAD_ASSETS 001 PROD
