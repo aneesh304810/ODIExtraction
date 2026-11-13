@@ -34,7 +34,7 @@ from bs4 import BeautifulSoup
 
 # ---------------------------------------------------------------- settings --
 # Copy the host from your browser's address bar (the part before /wab/...).
-BASE_URL = "https://CHANGE-ME.bbh.com/wab/person.asp?anr={anr}"
+BASE_URL = "https://njdirector.bbh.com/wab/person.asp?anr={anr}"
 
 # The page is addressed by the user's LDAP path; {lan} is replaced by the LAN ID.
 LDAP_PATH = "LDAP://bbhdom01.bbh.com/CN={lan},CN=Users,DC=bbhdom01,DC=bbh,DC=com"
