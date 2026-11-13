@@ -54,7 +54,9 @@ def make_session(user=None, ca_bundle=None):
         import truststore
         truststore.inject_into_ssl()
     except ImportError:
-        pass
+        if not ca_bundle:
+            print("truststore not installed: internal certificates may fail "
+                  "(pip install truststore)", file=sys.stderr)
 
     s = requests.Session()
     if ca_bundle:
@@ -225,6 +227,7 @@ def main():
     if a.max_delay < a.min_delay:
         a.max_delay = a.min_delay
     cache, depts, reviewers, statuses = {}, [], [], []
+    errors_in_a_row = 0
     total = len(df)
     for i, raw in enumerate(df[col].fillna(""), 1):
         lan = str(raw).strip()
@@ -243,8 +246,17 @@ def main():
                     d = pick(fields, DEPARTMENT_LABELS)
                     rv = tidy_person(pick(fields, REVIEWER_LABELS))
                     cache[key] = (d, rv, "ok" if d or rv else "fields not matched")
+                errors_in_a_row = 0
             except Exception as e:  # keep going; record the error in the sheet
                 cache[key] = ("", "", f"error: {e}")
+                errors_in_a_row += 1
+                if errors_in_a_row >= 3:
+                    hint = ""
+                    if "CERTIFICATE_VERIFY_FAILED" in str(e):
+                        hint = "\nFix: pip install truststore   (or pass --ca-bundle corp-ca.pem)"
+                    elif "401" in str(e):
+                        hint = "\nFix: pip install requests-negotiate-sspi   (or pass --user DOMAIN\\you)"
+                    sys.exit(f"Stopping: 3 lookups in a row failed. Last error:\n{e}{hint}")
         d, rv, st = cache[key]
         depts.append(d); reviewers.append(rv); statuses.append(st)
         print(f"[{i}/{total}] {lan:12} {st:10} {d} | {rv}")
