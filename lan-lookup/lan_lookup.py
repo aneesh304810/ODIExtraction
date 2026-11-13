@@ -16,11 +16,15 @@ Run it on your work PC (it needs the corporate network and your Windows login).
     # 2) Then process the whole sheet:
     python lan_lookup.py users.xlsx
     python lan_lookup.py users.xlsx --column "LAN ID" --out users_with_dept.xlsx
+
+    # Lookups are spaced out with random 2-6s waits and a 30-90s break every
+    # 25 lookups; tune with --min-delay/--max-delay/--break-every/--break-min/--break-max.
 """
 import argparse
 import getpass
 import re
 import sys
+import random
 import time
 from urllib.parse import quote
 
@@ -124,8 +128,28 @@ def tidy_person(value):
     return re.sub(r"^\d+\s+", "", value)
 
 
-def lookup(session, lan, timeout=30):
-    r = session.get(build_url(lan), timeout=timeout)
+def human_pause(a, n_done):
+    """Random wait between lookups, plus a longer break every so often,
+    so requests come at a gentle, uneven pace instead of a rapid burst."""
+    wait = random.uniform(a.min_delay, a.max_delay)
+    if a.break_every and n_done and n_done % a.break_every == 0:
+        wait += random.uniform(a.break_min, a.break_max)
+        print(f"  ...taking a {wait:.0f}s break after {n_done} lookups")
+    time.sleep(wait)
+
+
+def lookup(session, lan, timeout=30, retries=3):
+    for attempt in range(retries + 1):
+        r = session.get(build_url(lan), timeout=timeout)
+        # Server says slow down / busy: back off (longer each time) and retry.
+        if r.status_code in (429, 503) and attempt < retries:
+            retry_after = r.headers.get("Retry-After", "")
+            wait = int(retry_after) if retry_after.isdigit() else 30 * 2 ** attempt
+            wait += random.uniform(0, 10)
+            print(f"  server busy ({r.status_code}), waiting {wait:.0f}s before retrying")
+            time.sleep(wait)
+            continue
+        break
     if r.status_code == 401:
         raise RuntimeError("401 Unauthorized - try --user DOMAIN\\yourid")
     r.raise_for_status()
@@ -157,7 +181,14 @@ def main():
     ap.add_argument("--base-url", help="override BASE_URL (must contain {anr})")
     ap.add_argument("--user", help="DOMAIN\\user for NTLM login instead of SSO")
     ap.add_argument("--ca-bundle", help="path to the corporate CA .pem if TLS fails")
-    ap.add_argument("--delay", type=float, default=0.3, help="seconds between requests")
+    ap.add_argument("--min-delay", type=float, default=2.0,
+                    help="shortest random wait between lookups, seconds (default 2)")
+    ap.add_argument("--max-delay", type=float, default=6.0,
+                    help="longest random wait between lookups, seconds (default 6)")
+    ap.add_argument("--break-every", type=int, default=25,
+                    help="take a longer break after this many lookups (0 = never; default 25)")
+    ap.add_argument("--break-min", type=float, default=30.0, help="shortest break, seconds (default 30)")
+    ap.add_argument("--break-max", type=float, default=90.0, help="longest break, seconds (default 90)")
     ap.add_argument("--dump", metavar="LANID",
                     help="look up one LAN ID, print every field found, save the HTML")
     a = ap.parse_args()
@@ -191,6 +222,8 @@ def main():
     col = find_lan_column(df, a.column)
     out = a.out or re.sub(r"\.xls[xm]?$", "", a.excel, flags=re.I) + "_with_dept.xlsx"
 
+    if a.max_delay < a.min_delay:
+        a.max_delay = a.min_delay
     cache, depts, reviewers, statuses = {}, [], [], []
     total = len(df)
     for i, raw in enumerate(df[col].fillna(""), 1):
@@ -200,6 +233,8 @@ def main():
             continue
         key = lan.upper()
         if key not in cache:
+            if cache:  # pause before every lookup except the first
+                human_pause(a, len(cache))
             try:
                 fields, _ = lookup(session, lan)
                 if not fields:
@@ -210,7 +245,6 @@ def main():
                     cache[key] = (d, rv, "ok" if d or rv else "fields not matched")
             except Exception as e:  # keep going; record the error in the sheet
                 cache[key] = ("", "", f"error: {e}")
-            time.sleep(a.delay)
         d, rv, st = cache[key]
         depts.append(d); reviewers.append(rv); statuses.append(st)
         print(f"[{i}/{total}] {lan:12} {st:10} {d} | {rv}")
