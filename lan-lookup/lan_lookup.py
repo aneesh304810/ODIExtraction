@@ -227,8 +227,31 @@ def main():
     if a.max_delay < a.min_delay:
         a.max_delay = a.min_delay
     cache, depts, reviewers, statuses = {}, [], [], []
-    errors_in_a_row = 0
     total = len(df)
+
+    def save():
+        """Write results so far; rows not reached yet are marked 'not done yet'."""
+        pad = total - len(statuses)
+        out_df = df.copy()
+        out_df["Department"] = depts + [""] * pad
+        out_df["Reviewer"] = reviewers + [""] * pad
+        out_df["Lookup Status"] = statuses + ["not done yet"] * pad
+        try:
+            out_df.to_excel(out, index=False)
+        except PermissionError:
+            print(f"  could not save {out} - is it open in Excel? Close it.", file=sys.stderr)
+
+    try:
+        run_rows(df, col, a, session, cache, depts, reviewers, statuses, total, save)
+    except KeyboardInterrupt:
+        print("\nStopped by you (Ctrl+C).")
+    finally:
+        save()
+        print(f"\n{statuses.count('ok')}/{total} found. Saved to {out}")
+
+
+def run_rows(df, col, a, session, cache, depts, reviewers, statuses, total, save):
+    errors_in_a_row = 0
     for i, raw in enumerate(df[col].fillna(""), 1):
         lan = str(raw).strip()
         if not lan:
@@ -256,15 +279,15 @@ def main():
                         hint = "\nFix: pip install truststore   (or pass --ca-bundle corp-ca.pem)"
                     elif "401" in str(e):
                         hint = "\nFix: pip install requests-negotiate-sspi   (or pass --user DOMAIN\\you)"
-                    sys.exit(f"Stopping: 3 lookups in a row failed. Last error:\n{e}{hint}")
+                    print(f"Stopping: 3 lookups in a row failed. Last error:\n{e}{hint}",
+                          file=sys.stderr)
+                    statuses.append(cache[key][2]); depts.append(""); reviewers.append("")
+                    return
         d, rv, st = cache[key]
         depts.append(d); reviewers.append(rv); statuses.append(st)
         print(f"[{i}/{total}] {lan:12} {st:10} {d} | {rv}")
-
-    df["Department"], df["Reviewer"], df["Lookup Status"] = depts, reviewers, statuses
-    df.to_excel(out, index=False)
-    ok = statuses.count("ok")
-    print(f"\nDone: {ok}/{total} found. Saved to {out}")
+        if i % 20 == 0:  # save progress regularly in case the run is cut short
+            save()
 
 
 if __name__ == "__main__":
